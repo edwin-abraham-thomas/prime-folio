@@ -1,0 +1,30 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="over" position="end" class="drawer-content p-3">
+    <mat-button-toggle-group
+      vertical="true"
+      class="w-full"
+      (change)="onNavSelectionChange($event)"
+    >
+      @for (item of navItems; track $index) {
+      <mat-button-toggle [value]="item.navLink" [checked]="isSelectedNavItem(item.navLink)">{{
+        item.displayName
+      }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+
+  </mat-drawer>
+
+  <div class="app-content">
+    <mat-toolbar>
+      <span>Prime Folio</span>
+      <span class="spacer"></span>
+
+      <button mat-icon-button type="button" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div class="p-3">
+      <ng-container [ngTemplateOutlet]="appContent"> </ng-container>
+    </div>
+  </div>
+</mat-drawer-container>
