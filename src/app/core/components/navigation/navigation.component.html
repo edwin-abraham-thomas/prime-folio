@@ -1,17 +1,29 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="over" position="end" class="drawer-content p-3">
-    <mat-button-toggle-group
-      vertical="true"
-      class="w-full"
-      (change)="onNavSelectionChange($event)"
-    >
-      @for (item of navItems; track $index) {
-      <mat-button-toggle [value]="item.navLink" [checked]="isSelectedNavItem(item.navLink)">{{
-        item.displayName
-      }}</mat-button-toggle>
-      }
-    </mat-button-toggle-group>
-
+    <div class="h-full flex flex-col justify-between overflow-hidden">
+      <div>
+        <mat-button-toggle-group
+          vertical="true"
+          class="w-full"
+          (change)="onNavSelectionChange($event); drawer.close()"
+        >
+          @for (item of navItems; track $index) {
+          <mat-button-toggle
+            [value]="item.navLink"
+            [checked]="isSelectedNavItem(item.navLink)"
+            >{{ item.displayName }}</mat-button-toggle
+          >
+          }
+        </mat-button-toggle-group>
+      </div>
+      <div class="m-0">
+        @if(isAuthenticated$ | async; as isAuthenticated){
+        <button mat-button class="w-full" color="warn" (click)="onLogout()">Logout</button>
+        } @else {
+        <button mat-button class="w-full" color="accent" (click)="onLogin()">Login</button>
+        }
+      </div>
+    </div>
   </mat-drawer>
 
   <div class="app-content">
@@ -23,7 +35,7 @@
         <mat-icon>menu</mat-icon>
       </button>
     </mat-toolbar>
-    <div class="p-3">
+    <div class="p-3 h-100">
       <ng-container [ngTemplateOutlet]="appContent"> </ng-container>
     </div>
   </div>

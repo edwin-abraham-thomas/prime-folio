@@ -9,3 +9,8 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.spacer-vertical {
+  flex: 1 1 auto;
+  flex-direction: column;
+}

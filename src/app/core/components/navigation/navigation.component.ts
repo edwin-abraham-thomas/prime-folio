@@ -10,7 +10,8 @@ import {
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Observable, filter } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-navigation',
@@ -33,7 +34,7 @@ export class NavigationComponent implements OnInit {
 
   selectedNavItem: NavItem | undefined;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private authService: AuthService){}
 
   navItems: Array<NavItem> = [
     { displayName: 'Profile', navLink: 'profile' },
@@ -58,5 +59,17 @@ export class NavigationComponent implements OnInit {
 
   onNavSelectionChange(change: MatButtonToggleChange) {
     this.router.navigate([`/${change.value}`]);
+  }
+
+  onLogin() {
+    this.authService.loginWithRedirect()
+  }
+
+  onLogout() {
+    this.authService.logout()
+  }
+
+  get isAuthenticated$(): Observable<boolean> {
+    return this.authService.isAuthenticated$;
   }
 }
