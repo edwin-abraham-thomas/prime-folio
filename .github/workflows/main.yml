@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: npm run build-development
 
       - name: Create artifact zip
         run: cd dist/${{ env.APP_NAME }}/browser && zip ../../${{ env.ARTIFACT_FILE_NAME }} *
