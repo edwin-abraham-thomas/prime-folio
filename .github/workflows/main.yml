@@ -34,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Create artifact zip
-        run: cd dist/${{ env.APP_NAME }} && zip ../${{ env.ARTIFACT_FILE_NAME }} *
+        run: cd dist/${{ env.APP_NAME }}/browser && zip ../${{ env.ARTIFACT_FILE_NAME }} *
 
       - uses: actions/upload-artifact@master
         with:
