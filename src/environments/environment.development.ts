@@ -1,11 +1,8 @@
-import { domain, clientId } from '../../auth_config.json';
+import { development } from '../../auth_config.json';
 
 export const environment = {
+    name: "development",
     auth: {
-        domain,
-        clientId,
-        authorizationParams: {
-            redirect_uri: 'http://localhost:4200/',
-        }
+        ...development
     }
 };

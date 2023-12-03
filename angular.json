@@ -61,6 +61,17 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "local":{
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -73,9 +84,12 @@
             },
             "development": {
               "buildTarget": "prime-folio:build:development"
+            },
+            "local": {
+              "buildTarget": "prime-folio:build:local"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "local"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

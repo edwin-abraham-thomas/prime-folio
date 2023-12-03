@@ -8,6 +8,8 @@ import { environment } from '../environments/environment.development';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimations(), 
-    importProvidersFrom(AuthModule.forRoot(environment.auth))
+    importProvidersFrom(AuthModule.forRoot({...environment.auth, authorizationParams:{
+      redirect_uri: window.location.origin
+    }}))
   ]
 };
