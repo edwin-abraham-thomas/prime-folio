@@ -1,1 +1,13 @@
-<p>portfolio-update-container works!</p>
+<mat-grid-list [cols]="layout.dimension.colSpan" gutterSize="10px" rowHeight="100px">
+  @for (tile of layout.tiles; track $index) {
+  <mat-grid-tile
+    [colspan]="tile.dimension.colSpan"
+    [rowspan]="tile.dimension.rowSpan"
+  >
+  <!-- <mat-grid-tile-header></mat-grid-tile-header> -->
+    <div class="h-full w-full">
+        <app-tile [tile]="tile"></app-tile>
+    </div>
+  </mat-grid-tile>
+  }
+</mat-grid-list>
