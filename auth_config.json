@@ -1,11 +1,13 @@
 {
   "local": {
     "domain": "edwinat-dev.jp.auth0.com",
-    "clientId": "TS3Zpusxe44twyGCKHeouJYcKsR2Zb0P"
+    "clientId": "TS3Zpusxe44twyGCKHeouJYcKsR2Zb0P",
+    "logoutRedirectUrl": "http://localhost:4200/"
   },
 
   "development": {
     "domain": "edwinat-dev.jp.auth0.com",
-    "clientId": "TS3Zpusxe44twyGCKHeouJYcKsR2Zb0P"
+    "clientId": "TS3Zpusxe44twyGCKHeouJYcKsR2Zb0P",
+    "logoutRedirectUrl": "https://dev.dnnuymfxr7fs5.amplifyapp.com/"
   }
 }

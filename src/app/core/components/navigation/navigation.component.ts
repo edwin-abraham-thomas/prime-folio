@@ -11,7 +11,8 @@ import {
 } from '@angular/material/button-toggle';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
-import { AuthService } from '@auth0/auth0-angular';
+import { AuthService, LogoutOptions } from '@auth0/auth0-angular';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-navigation',
@@ -66,7 +67,14 @@ export class NavigationComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout()
+    const opts: LogoutOptions = {
+      
+    }
+    this.authService.logout({
+      logoutParams: {
+        returnTo: environment.auth.logoutRedirectUrl
+      }
+    })
   }
 
   get isAuthenticated$(): Observable<boolean> {
