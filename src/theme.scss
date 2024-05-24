@@ -1,0 +1,74 @@
+@use "@angular/material" as mat;
+@use "sass:map";
+@use '@fireflysemantics/sass-logger' as logger;
+
+@include mat.core();
+
+
+$app-primary: mat.define-palette(mat.$blue-palette, 100);
+$app-accent: mat.define-palette(mat.$purple-palette);
+$app-warn: mat.define-palette(mat.$red-palette);
+
+$app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-primary,
+      accent: $app-accent,
+      warn: $app-warn,
+      is-dark: false,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+$app-light-theme-background: (
+  status-bar: green,
+  app-bar:    green,
+  background: orange,
+  hover:      orange, 
+  card:       green,
+  dialog:     green,
+  disabled-button: green,
+  raised-button: green,
+  focused-button: green,
+  selected-button: green,
+  selected-disabled-button: green,
+  disabled-button-toggle: black,
+  unselected-chip: green,
+  disabled-list-option: black,
+);
+
+$color-map: map.get($app-theme, 'color');
+$modified-color-map: map.merge($color-map, ('background': $app-light-theme-background));
+$app-theme: map.merge($app-theme, ('color': $modified-color-map));
+
+// @debug logger.pretty-map($app-theme);
+
+@include mat.all-component-themes($app-theme);
+
+
+$blue-pallet: (
+  50: #e2e3ec,
+  100: #b8b8d1,
+  200: #8a8ab4,
+  300: #5e5f9a,
+  400: #3f4089,
+  500: #1b2177,
+  600: #161b6f,
+  700: #0c1365,
+  800: #000959,
+  900: #000046,
+  contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: rgba(black, 0.87),
+   400: white,
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white,
+ )
+);

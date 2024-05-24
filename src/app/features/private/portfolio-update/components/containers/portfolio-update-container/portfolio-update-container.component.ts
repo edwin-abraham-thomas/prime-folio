@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Layout } from '../../../models/layout';
+import { ContentType, Layout } from '../../../models/layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TileComponent } from '../../tile/tile.component';
 
@@ -24,19 +24,30 @@ export class PortfolioUpdateContainerComponent {
         },
         content: {
           title: 'Edwin Abraham Thomas',
-          type: 'header'
-        }
+          type: ContentType.header,
+        },
       },
       {
         dimension: {
           rowSpan: 2,
-          colSpan: 2,
+          colSpan: 3,
         },
         content: {
-          title: 'Title',
+          title: 'About',
           discription:
-            'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.',
-            type: 'section'
+            'This is a sample about me description',
+          type: ContentType.section,
+        },
+      },
+      {
+        dimension: {
+          rowSpan: 2,
+          colSpan: 1,
+        },
+        content: {
+          title: 'Contacts',
+          discription: 'Phone: 6362783980\n Email: edinabrahamthomas@outlook.com',
+          type: ContentType.section,
         },
       },
     ],
