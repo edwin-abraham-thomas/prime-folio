@@ -46,7 +46,7 @@ export class PortfolioUpdateContainerComponent {
         },
         content: {
           title: 'Contacts',
-          discription: 'Phone: 6362783980\n Email: edinabrahamthomas@outlook.com',
+          discription: 'Phone: 1234567890\n Email: samplesamplesample@mail.com',
           type: ContentType.section,
         },
       },
