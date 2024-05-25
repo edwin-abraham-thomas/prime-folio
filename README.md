@@ -5,6 +5,7 @@ Build, maintain and share portfolio using Prime Folio
 - Angular
 - Angular Material
 - Auth0
+- AWS Amplify
 
 ## Get Started
 1. Clone repo `git clone https://github.com/edwin-abraham-thomas/prime-folio.git`.
