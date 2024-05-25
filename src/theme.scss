@@ -1,54 +1,12 @@
 @use "@angular/material" as mat;
 @use "sass:map";
-@use '@fireflysemantics/sass-logger' as logger;
+@use "@fireflysemantics/sass-logger" as logger;
 
 @include mat.core();
 
+// #region Palettes
 
-$app-primary: mat.define-palette(mat.$blue-palette, 100);
-$app-accent: mat.define-palette(mat.$purple-palette);
-$app-warn: mat.define-palette(mat.$red-palette);
-
-$app-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $app-primary,
-      accent: $app-accent,
-      warn: $app-warn,
-      is-dark: false,
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
-
-$app-light-theme-background: (
-  status-bar: green,
-  app-bar:    green,
-  background: orange,
-  hover:      orange, 
-  card:       green,
-  dialog:     green,
-  disabled-button: green,
-  raised-button: green,
-  focused-button: green,
-  selected-button: green,
-  selected-disabled-button: green,
-  disabled-button-toggle: black,
-  unselected-chip: green,
-  disabled-list-option: black,
-);
-
-$color-map: map.get($app-theme, 'color');
-$modified-color-map: map.merge($color-map, ('background': $app-light-theme-background));
-$app-theme: map.merge($app-theme, ('color': $modified-color-map));
-
-// @debug logger.pretty-map($app-theme);
-
-@include mat.all-component-themes($app-theme);
-
-
-$blue-pallet: (
+$french-blue-pallet: (
   50: #e2e3ec,
   100: #b8b8d1,
   200: #8a8ab4,
@@ -60,15 +18,144 @@ $blue-pallet: (
   800: #000959,
   900: #000046,
   contrast: (
-   50: rgba(black, 0.87),
-   100: rgba(black, 0.87),
-   200: rgba(black, 0.87),
-   300: rgba(black, 0.87),
-   400: white,
-   500: white,
-   600: white,
-   700: white,
-   800: white,
-   900: white,
- )
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
 );
+
+$tea-green-pallet: (
+  50: #f1f5e7,
+  100: #dde6c4,
+  200: #c7d59f,
+  300: #b0c578,
+  400: #9fba5a,
+  500: #8faf3b,
+  600: #80a034,
+  700: #6c8d2b,
+  800: #597922,
+  900: #375911,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: rgba(black, 0.87),
+    800: rgba(black, 0.87),
+    900: white,
+  ),
+);
+
+// #endregion
+
+$app-light-primary: mat.define-palette($tea-green-pallet, 300);
+$app-light-accent: mat.define-palette(mat.$purple-palette);
+$app-light-warn: mat.define-palette(mat.$red-palette);
+
+$app-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-light-primary,
+      accent: $app-light-accent,
+      warn: $app-light-warn,
+      is-dark: false,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+$app-light-theme-background: (
+  status-bar: map.get($app-light-primary, 100),
+  app-bar: map.get($app-light-primary, 300),
+  background: map.get($app-light-primary, 50),
+  hover: map.get($app-light-primary, 100),
+  card: map.get($app-light-primary, 50),
+  dialog: map.get($app-light-primary, 50),
+  disabled-button: map.get($app-light-primary, 100),
+  raised-button: map.get($app-light-primary, 100),
+  focused-button: map.get($app-light-primary, 100),
+  selected-button: map.get($app-light-primary, 100),
+  selected-disabled-button: map.get($app-light-primary, 100),
+  disabled-button-toggle: map.get($app-light-primary, 100),
+  unselected-chip: map.get($app-light-primary, 100),
+  disabled-list-option: map.get($app-light-primary, 100),
+);
+
+$app-light-theme-foreground: (
+  base: black,
+  divider: map.get($app-light-primary, 900),
+  dividers: map.get($app-light-primary, 900),
+  disabled: map.get($app-light-primary, 900),
+  disabled-button: map.get($app-light-primary, 900),
+  disabled-text: map.get($app-light-primary, 900),
+  elevation: map.get($app-light-primary, 900),
+  hint-text: map.get($app-light-primary, 900),
+  secondary-text: map.get($app-light-primary, 900),
+  icon: map.get($app-light-primary, 900),
+  icons: map.get($app-light-primary, 900),
+  text: black,
+  slider-min: map.get($app-light-primary, 900),
+  slider-off: map.get($app-light-primary, 900),
+  slider-off-active: map.get($app-light-primary, 900),
+);
+
+$color-map: map.get($app-light-theme, "color");
+
+$modified--background-color-map: map.merge(
+  $color-map,
+  (
+    "background": $app-light-theme-background,
+  )
+);
+$app-light-theme: map.merge(
+  $app-light-theme,
+  (
+    "color": $modified--background-color-map,
+  )
+);
+
+$color-map: map.get($app-light-theme, "color");
+$modified-color-map: map.merge(
+  $color-map,
+  (
+    "foreground": $app-light-theme-foreground,
+  )
+);
+$app-light-theme: map.merge(
+  $app-light-theme,
+  (
+    "color": $modified-color-map,
+  )
+);
+
+// @debug logger.pretty-map($app-light-theme);
+
+$app-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $app-light-primary,
+      accent: $app-light-accent,
+      warn: $app-light-warn,
+      is-dark: false,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($app-light-theme);
+
+.dark-theme {
+  @include mat.all-component-themes($app-dark-theme);
+}

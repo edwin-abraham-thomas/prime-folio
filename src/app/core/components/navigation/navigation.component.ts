@@ -9,6 +9,7 @@ import {
   MatButtonToggleChange,
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
+import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
 import { AuthService, LogoutOptions } from '@auth0/auth0-angular';
@@ -24,60 +25,76 @@ import { environment } from '../../../../environments/environment';
     MatIconModule,
     MatSidenavModule,
     MatButtonToggleModule,
+    MatSlideToggleModule,
   ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
 })
 export class NavigationComponent implements OnInit {
-
   @ContentChild('appContent')
   appContent!: TemplateRef<unknown>;
 
   selectedNavItem: NavItem | undefined;
+  isDarkTheme: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService){}
+  constructor(private router: Router, private authService: AuthService) {}
 
   navItems: Array<NavItem> = [
     { displayName: 'Profile', navLink: 'profile' },
     { displayName: 'Portfolio', navLink: 'portfolio-update' },
   ];
-  
+
   ngOnInit(): void {
     this.router.events
-    .pipe(
-      filter((event) => event instanceof NavigationEnd)
-    )
-    .subscribe((event) => {
-      const rootUrlSegment = (event as NavigationEnd).url.split('/')[1];
-      this.selectedNavItem = this.navItems.find(item => item.navLink == rootUrlSegment)
-      console.log(rootUrlSegment)
-    })
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        const rootUrlSegment = (event as NavigationEnd).url.split('/')[1];
+        this.selectedNavItem = this.navItems.find(
+          (item) => item.navLink == rootUrlSegment
+        );
+        console.log(rootUrlSegment);
+      });
   }
 
+  //#region Nav
+
   isSelectedNavItem(navLink: string) {
-    return navLink === this.selectedNavItem?.navLink
+    return navLink === this.selectedNavItem?.navLink;
   }
 
   onNavSelectionChange(change: MatButtonToggleChange) {
     this.router.navigate([`/${change.value}`]);
   }
 
+  //#endregion
+
+  //#region Auth
+  
   onLogin() {
-    this.authService.loginWithRedirect()
+    this.authService.loginWithRedirect();
   }
 
   onLogout() {
-    const opts: LogoutOptions = {
-      
-    }
+    const opts: LogoutOptions = {};
     this.authService.logout({
       logoutParams: {
-        returnTo: environment.auth.logoutRedirectUrl
-      }
-    })
+        returnTo: environment.auth.logoutRedirectUrl,
+      },
+    });
   }
 
   get isAuthenticated$(): Observable<boolean> {
     return this.authService.isAuthenticated$;
   }
+
+  //#endregion
+
+  //#region Theme
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme
+  }
+
+  //#endregion
+
 }

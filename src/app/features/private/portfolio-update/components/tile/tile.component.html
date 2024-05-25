@@ -1,12 +1,12 @@
 @if (tile) { @switch (tile.content.type) { @case (ContentType_Header) {
-<mat-card>
+<mat-card appearance="outlined">
   <mat-card-header>
     <mat-card-title>{{ tile.content.title }}</mat-card-title>
   </mat-card-header>
   <mat-card-content></mat-card-content>
 </mat-card>
 } @case (ContentType_Section) {
-<mat-card class="h-full">
+<mat-card class="h-full" appearance="outlined">
   <mat-card-header>
     <mat-card-title>{{ tile.content.title }}</mat-card-title>
   </mat-card-header>
