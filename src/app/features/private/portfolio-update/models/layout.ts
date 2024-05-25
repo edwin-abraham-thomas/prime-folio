@@ -19,4 +19,7 @@ export interface TileContent {
     type: ContentType
 }
 
-export type ContentType = 'header' | 'section';
+export enum ContentType{
+    header,
+    section
+}

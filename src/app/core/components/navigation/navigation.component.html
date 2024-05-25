@@ -1,7 +1,7 @@
-<mat-drawer-container autosize>
+<mat-drawer-container [class.dark-theme]="isDarkTheme">
   <mat-drawer #drawer mode="over" position="end" class="drawer-content p-3">
     <div class="h-full flex flex-col justify-between overflow-hidden">
-      <div>
+      <div class="flex flex-col justify-between gap-y-4">
         <mat-button-toggle-group
           vertical="true"
           class="w-full"
@@ -15,19 +15,30 @@
           >
           }
         </mat-button-toggle-group>
+        
       </div>
-      <div class="m-0">
-        @if(isAuthenticated$ | async; as isAuthenticated){
-        <button mat-button class="w-full" color="warn" (click)="onLogout()">Logout</button>
-        } @else {
-        <button mat-button class="w-full" color="accent" (click)="onLogin()">Login</button>
-        }
+      <div>
+        <div class="flex flex-col">
+
+          <div class="mb-5 flex justify-center">
+            <mat-slide-toggle [checked]="isDarkTheme" (toggleChange)="toggleTheme()">Dark Theme</mat-slide-toggle>
+          </div>
+          @if(isAuthenticated$ | async; as isAuthenticated){
+          <button mat-button class="w-full" color="warn" (click)="onLogout()">
+            Logout
+          </button>
+          } @else {
+          <button mat-button class="w-full" color="accent" (click)="onLogin()">
+            Login
+          </button>
+          }
+        </div>
       </div>
     </div>
   </mat-drawer>
 
   <div class="app-content">
-    <mat-toolbar>
+    <mat-toolbar color="primary">
       <span>Prime Folio</span>
       <span class="spacer"></span>
 
