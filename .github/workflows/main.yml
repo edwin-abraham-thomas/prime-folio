@@ -36,7 +36,7 @@ jobs:
       - name: Create artifact zip
         run: cd dist/${{ env.APP_NAME }}/browser && zip ../../${{ env.ARTIFACT_FILE_NAME }} *
 
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v3
         with:
           name: build-artifact
           path: dist/${{ env.ARTIFACT_FILE_NAME }}
