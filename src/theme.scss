@@ -56,10 +56,37 @@ $tea-green-pallet: (
   ),
 );
 
+$light-blue-pallet: (
+  50: #dbf4ff,
+  100: #bddfea,
+  200: #9fc7d5,
+  300: #7faebf,
+  400: #669bae,
+  500: #4c899d,
+  600: #40798b,
+  700: #316475,
+  800: #245160,
+  900: #113b48,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
 // #endregion
 
+// #region Light theme
+
 $app-light-primary: mat.define-palette($tea-green-pallet, 300);
-$app-light-accent: mat.define-palette(mat.$purple-palette);
+$app-light-accent: mat.define-palette($light-blue-pallet, 500);
 $app-light-warn: mat.define-palette(mat.$red-palette);
 
 $app-light-theme: mat.define-light-theme(
@@ -68,7 +95,6 @@ $app-light-theme: mat.define-light-theme(
       primary: $app-light-primary,
       accent: $app-light-accent,
       warn: $app-light-warn,
-      is-dark: false,
     ),
     typography: mat.define-typography-config(),
     density: 0,
@@ -77,12 +103,12 @@ $app-light-theme: mat.define-light-theme(
 
 $app-light-theme-background: (
   status-bar: map.get($app-light-primary, 100),
-  app-bar: map.get($app-light-primary, 300),
+  app-bar: map.get($app-light-primary, 200),
   background: map.get($app-light-primary, 50),
   hover: map.get($app-light-primary, 100),
   card: map.get($app-light-primary, 50),
   dialog: map.get($app-light-primary, 50),
-  disabled-button: map.get($app-light-primary, 100),
+  disabled-button: map.get($app-light-primary, 500),
   raised-button: map.get($app-light-primary, 100),
   focused-button: map.get($app-light-primary, 100),
   selected-button: map.get($app-light-primary, 100),
@@ -93,7 +119,7 @@ $app-light-theme-background: (
 );
 
 $app-light-theme-foreground: (
-  base: black,
+  base: map.get($app-light-primary, 900),
   divider: map.get($app-light-primary, 900),
   dividers: map.get($app-light-primary, 900),
   disabled: map.get($app-light-primary, 900),
@@ -102,8 +128,8 @@ $app-light-theme-foreground: (
   elevation: map.get($app-light-primary, 900),
   hint-text: map.get($app-light-primary, 900),
   secondary-text: map.get($app-light-primary, 900),
-  icon: map.get($app-light-primary, 900),
-  icons: map.get($app-light-primary, 900),
+  icon: map.get($app-light-primary, 100),
+  icons: map.get($app-light-primary, 100),
   text: black,
   slider-min: map.get($app-light-primary, 900),
   slider-off: map.get($app-light-primary, 900),
@@ -112,34 +138,18 @@ $app-light-theme-foreground: (
 
 $color-map: map.get($app-light-theme, "color");
 
-$modified--background-color-map: map.merge(
-  $color-map,
-  (
-    "background": $app-light-theme-background,
-  )
-);
-$app-light-theme: map.merge(
-  $app-light-theme,
-  (
-    "color": $modified--background-color-map,
-  )
-);
+$modified--background-color-map: map.merge($color-map, ("background": $app-light-theme-background,));
+$app-light-theme: map.merge($app-light-theme, ("color": $modified--background-color-map,));
 
 $color-map: map.get($app-light-theme, "color");
-$modified-color-map: map.merge(
-  $color-map,
-  (
-    "foreground": $app-light-theme-foreground,
-  )
-);
-$app-light-theme: map.merge(
-  $app-light-theme,
-  (
-    "color": $modified-color-map,
-  )
-);
+$modified-color-map: map.merge($color-map, ("foreground": $app-light-theme-foreground,));
+$app-light-theme: map.merge($app-light-theme, ("color": $modified-color-map,));
+
+// #endregion
 
 // @debug logger.pretty-map($app-light-theme);
+
+// #region Dark theme
 
 $app-dark-theme: mat.define-dark-theme(
   (
@@ -147,12 +157,13 @@ $app-dark-theme: mat.define-dark-theme(
       primary: $app-light-primary,
       accent: $app-light-accent,
       warn: $app-light-warn,
-      is-dark: false,
     ),
     typography: mat.define-typography-config(),
     density: 0,
   )
 );
+
+// #endregion
 
 @include mat.all-component-themes($app-light-theme);
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContentType, Layout } from '../../../models/layout';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { TileComponent } from '../../tile/tile.component';
+import { TileComponent } from '../../../../../../shared/components/tile/tile.component';
 
 @Component({
   selector: 'app-portfolio-update-container',

@@ -9,7 +9,10 @@ import {
   MatButtonToggleChange,
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
-import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {
+  MatSlideToggleChange,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
 import { AuthService, LogoutOptions } from '@auth0/auth0-angular';
@@ -35,7 +38,9 @@ export class NavigationComponent implements OnInit {
   appContent!: TemplateRef<unknown>;
 
   selectedNavItem: NavItem | undefined;
+
   isDarkTheme: boolean = false;
+  isDarkThemeStorageKey = 'prime-folio-is-dark-theme';
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -52,8 +57,9 @@ export class NavigationComponent implements OnInit {
         this.selectedNavItem = this.navItems.find(
           (item) => item.navLink == rootUrlSegment
         );
-        console.log(rootUrlSegment);
       });
+
+    this.initializeTheme();
   }
 
   //#region Nav
@@ -69,7 +75,7 @@ export class NavigationComponent implements OnInit {
   //#endregion
 
   //#region Auth
-  
+
   onLogin() {
     this.authService.loginWithRedirect();
   }
@@ -91,10 +97,30 @@ export class NavigationComponent implements OnInit {
 
   //#region Theme
 
+  initializeTheme() {
+    const usingDarkTheme = localStorage.getItem(this.isDarkThemeStorageKey)
+
+    if (!usingDarkTheme) {
+      localStorage.setItem(
+        this.isDarkThemeStorageKey,
+        false as unknown as string
+      );
+      return;
+    }
+
+    if (JSON.parse(usingDarkTheme) as boolean && !this.isDarkTheme) {
+      this.toggleTheme();
+    }
+  }
+
   toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme
+    this.isDarkTheme = !this.isDarkTheme;
+
+    localStorage.setItem(
+      this.isDarkThemeStorageKey,
+      this.isDarkTheme as unknown as string
+    );
   }
 
   //#endregion
-
 }
