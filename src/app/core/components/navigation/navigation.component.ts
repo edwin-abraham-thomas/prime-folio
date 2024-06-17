@@ -10,7 +10,6 @@ import {
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
 import {
-  MatSlideToggleChange,
   MatSlideToggleModule,
 } from '@angular/material/slide-toggle';
 import { NavigationEnd, Router } from '@angular/router';

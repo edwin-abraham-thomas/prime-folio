@@ -1,55 +1,28 @@
-import { Component } from '@angular/core';
-import { ContentType, Layout } from '../../../models/layout';
+import { Component, OnInit } from '@angular/core';
+import { Layout } from '../../../models/layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TileComponent } from '../../../../../../shared/components/tile/tile.component';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-portfolio-update-container',
   standalone: true,
-  imports: [MatGridListModule, TileComponent],
+  imports: [MatGridListModule, TileComponent, CommonModule],
   templateUrl: './portfolio-update-container.component.html',
   styleUrl: './portfolio-update-container.component.scss',
 })
-export class PortfolioUpdateContainerComponent {
-  layout: Layout = {
-    dimension: {
-      rowSpan: 0,
-      colSpan: 4,
-    },
-    tiles: [
-      {
-        dimension: {
-          rowSpan: 1,
-          colSpan: 4,
-        },
-        content: {
-          title: 'Edwin Abraham Thomas',
-          type: ContentType.header,
-        },
-      },
-      {
-        dimension: {
-          rowSpan: 2,
-          colSpan: 3,
-        },
-        content: {
-          title: 'About',
-          discription:
-            'This is a sample about me description',
-          type: ContentType.section,
-        },
-      },
-      {
-        dimension: {
-          rowSpan: 2,
-          colSpan: 1,
-        },
-        content: {
-          title: 'Contacts',
-          discription: 'Phone: 1234567890\n Email: samplesamplesample@mail.com',
-          type: ContentType.section,
-        },
-      },
-    ],
-  };
+export class PortfolioUpdateContainerComponent implements OnInit {
+
+  layout$: Observable<Layout> | null = null;
+
+  constructor(private readonly _route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.layout$ = this._route.data.pipe(
+      tap(data => console.log('route.data', data)),
+      switchMap(data => of(data['layout'] as Layout))
+    );
+  }
 }

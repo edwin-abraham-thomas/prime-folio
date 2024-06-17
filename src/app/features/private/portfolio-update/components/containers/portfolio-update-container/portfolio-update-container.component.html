@@ -1,12 +1,18 @@
-<mat-grid-list [cols]="layout.dimension.colSpan" gutterSize="10px" rowHeight="100px">
+@if(layout$ | async; as layout) {
+<mat-grid-list
+  [cols]="layout.dimension.colSpan"
+  gutterSize="0.625rem"
+  rowHeight="6.25rem"
+>
   @for (tile of layout.tiles; track $index) {
   <mat-grid-tile
     [colspan]="tile.dimension.colSpan"
     [rowspan]="tile.dimension.rowSpan"
   >
     <div class="h-full w-full">
-        <app-tile [tile]="tile"></app-tile>
+      <app-tile [tile]="tile"></app-tile>
     </div>
   </mat-grid-tile>
   }
 </mat-grid-list>
+}

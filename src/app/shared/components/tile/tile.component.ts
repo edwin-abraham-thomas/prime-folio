@@ -18,11 +18,12 @@ import { MatIconModule } from '@angular/material/icon';
 export class TileComponent {
   @Input() tile!: Tile;
 
+  //#region ContentType Getters
   get ContentType_Header(): ContentType {
     return ContentType.header;
   }
-
   get ContentType_Section(): ContentType {
     return ContentType.section;
   }
+  //#endregion
 }

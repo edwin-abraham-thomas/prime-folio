@@ -5,28 +5,34 @@ import { RouteSegments } from './shared/models/route-segments';
 import { HomeComponent } from './core/components/home/home.component';
 import { ErrorComponent } from './core/components/error/error.component';
 import { AuthGuard } from '@auth0/auth0-angular';
+import { portfolioResolver } from './features/private/portfolio-update/resolvers/portfolio/portfolio.resolver';
+import { userResolver } from './features/private/portfolio-update/resolvers/user/user.resolver';
 
 export const routes: Routes = [
   {
     path: RouteSegments.home,
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: RouteSegments.portfolio_update,
     component: PortfolioUpdateContainerComponent,
-    canActivate: [AuthGuard]
+    resolve: {
+      user: userResolver,
+      layout: portfolioResolver,
+    },
+    canActivate: [AuthGuard],
   },
   {
     path: RouteSegments.user_profile,
     component: UserProfileContainerComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: RouteSegments.error,
-    component: ErrorComponent
+    component: ErrorComponent,
   },
   {
     path: '**',
-    redirectTo: RouteSegments.error
-  }
+    redirectTo: RouteSegments.error,
+  },
 ];
