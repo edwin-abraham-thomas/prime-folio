@@ -6,6 +6,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
 import { environment } from '../environments/environment.development';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ApiModule } from './api/api.module';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +18,8 @@ export const appConfig: ApplicationConfig = {
         authorizationParams: {
           redirect_uri: window.location.origin,
         },
-      })
+      }),
+      ApiModule.forRoot({ rootUrl: environment.apiBaseURL })
     ),
     provideAnimationsAsync(),
   ],

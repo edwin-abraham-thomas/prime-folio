@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "apigen": "ng-openapi-gen --input https://localhost:7247/swagger/v1/swagger.json --output ./src/app/api",
+    "apigen": "ng-openapi-gen -c apigenconfig.json",
     "build": "ng build",
     "build-development": "ng build -c development",
     "watch": "ng build --watch --configuration development",
