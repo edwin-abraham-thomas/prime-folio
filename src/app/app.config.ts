@@ -7,7 +7,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { environment } from '../environments/environment.development';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ApiModule } from './api/api.module';
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [

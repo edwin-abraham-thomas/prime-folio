@@ -4,9 +4,9 @@ import { UserProfileContainerComponent } from './features/private/user-profile/c
 import { RouteSegments } from './shared/models/route-segments';
 import { HomeComponent } from './core/components/home/home.component';
 import { ErrorComponent } from './core/components/error/error.component';
-import { AuthGuard } from '@auth0/auth0-angular';
 import { portfolioResolver } from './features/private/portfolio-update/resolvers/portfolio/portfolio.resolver';
 import { userResolver } from './features/private/portfolio-update/resolvers/user/user.resolver';
+import { authGuard } from './shared/guards/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -20,12 +20,12 @@ export const routes: Routes = [
       user: userResolver,
       layout: portfolioResolver,
     },
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: RouteSegments.user_profile,
     component: UserProfileContainerComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: RouteSegments.error,

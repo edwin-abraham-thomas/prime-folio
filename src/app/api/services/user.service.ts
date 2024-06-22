@@ -9,6 +9,10 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { apiUserCreateOrVerifyUserPost$Json } from '../fn/user/api-user-create-or-verify-user-post-json';
+import { ApiUserCreateOrVerifyUserPost$Json$Params } from '../fn/user/api-user-create-or-verify-user-post-json';
+import { apiUserCreateOrVerifyUserPost$Plain } from '../fn/user/api-user-create-or-verify-user-post-plain';
+import { ApiUserCreateOrVerifyUserPost$Plain$Params } from '../fn/user/api-user-create-or-verify-user-post-plain';
 import { apiUserPost$Json } from '../fn/user/api-user-post-json';
 import { ApiUserPost$Json$Params } from '../fn/user/api-user-post-json';
 import { apiUserPost$Plain } from '../fn/user/api-user-post-plain';
@@ -26,6 +30,7 @@ import { ApiUserUserIdGet$Json$Params } from '../fn/user/api-user-user-id-get-js
 import { apiUserUserIdGet$Plain } from '../fn/user/api-user-user-id-get-plain';
 import { ApiUserUserIdGet$Plain$Params } from '../fn/user/api-user-user-id-get-plain';
 import { User } from '../models/user';
+import { UserCreateOrVerifyResponse } from '../models/user-create-or-verify-response';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends BaseService {
@@ -124,6 +129,53 @@ export class UserService extends BaseService {
   apiUserPost$Json(params?: ApiUserPost$Json$Params, context?: HttpContext): Observable<User> {
     return this.apiUserPost$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<User>): User => r.body)
+    );
+  }
+
+  /** Path part for operation `apiUserCreateOrVerifyUserPost()` */
+  static readonly ApiUserCreateOrVerifyUserPostPath = '/api/User/CreateOrVerifyUser';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUserCreateOrVerifyUserPost$Plain()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUserCreateOrVerifyUserPost$Plain$Response(params?: ApiUserCreateOrVerifyUserPost$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<UserCreateOrVerifyResponse>> {
+    return apiUserCreateOrVerifyUserPost$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUserCreateOrVerifyUserPost$Plain$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUserCreateOrVerifyUserPost$Plain(params?: ApiUserCreateOrVerifyUserPost$Plain$Params, context?: HttpContext): Observable<UserCreateOrVerifyResponse> {
+    return this.apiUserCreateOrVerifyUserPost$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserCreateOrVerifyResponse>): UserCreateOrVerifyResponse => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUserCreateOrVerifyUserPost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUserCreateOrVerifyUserPost$Json$Response(params?: ApiUserCreateOrVerifyUserPost$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<UserCreateOrVerifyResponse>> {
+    return apiUserCreateOrVerifyUserPost$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUserCreateOrVerifyUserPost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUserCreateOrVerifyUserPost$Json(params?: ApiUserCreateOrVerifyUserPost$Json$Params, context?: HttpContext): Observable<UserCreateOrVerifyResponse> {
+    return this.apiUserCreateOrVerifyUserPost$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserCreateOrVerifyResponse>): UserCreateOrVerifyResponse => r.body)
     );
   }
 

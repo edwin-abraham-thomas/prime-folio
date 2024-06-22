@@ -5,5 +5,5 @@ export const environment = {
     auth: {
         ...development
     },
-    apiBaseURL: 'https://pfz3a4ncgb.execute-api.ap-south-1.amazonaws.com'
+    apiBaseURL: 'https://localhost:7247'
 };
