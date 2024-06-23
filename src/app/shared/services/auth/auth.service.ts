@@ -43,6 +43,9 @@ export class AuthService {
         return firstValueFrom(this.authService.user$);
       }),
       mergeMap(async (user) => {
+        if (!user) {
+          return false;
+        }
         if (this.isPrimeFolioApiVerified) {
           return true;
         }
