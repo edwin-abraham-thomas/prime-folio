@@ -7,7 +7,8 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { environment } from '../environments/environment.development';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ApiModule } from './api/api.module';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpInterceptor } from './shared/interceptors/http.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,7 +23,7 @@ export const appConfig: ApplicationConfig = {
       }),
       ApiModule.forRoot({ rootUrl: environment.apiBaseURL }),
     ),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpInterceptor])),
     provideAnimationsAsync(),
   ],
 };

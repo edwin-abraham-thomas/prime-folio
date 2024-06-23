@@ -9,13 +9,13 @@ import {
   MatButtonToggleChange,
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
-import {
-  MatSlideToggleModule,
-} from '@angular/material/slide-toggle';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
-import { AuthService, LogoutOptions } from '@auth0/auth0-angular';
 import { environment } from '../../../../environments/environment';
+import { LoadingService } from '../../../shared/services/loading/loading.service';
+import { AuthService } from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -28,6 +28,7 @@ import { environment } from '../../../../environments/environment';
     MatSidenavModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
+    MatProgressBarModule,
   ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
@@ -41,12 +42,11 @@ export class NavigationComponent implements OnInit {
   isDarkTheme: boolean = false;
   isDarkThemeStorageKey = 'prime-folio-is-dark-theme';
 
-  constructor(private router: Router, private authService: AuthService) {}
-
-  navItems: Array<NavItem> = [
-    { displayName: 'Profile', navLink: 'profile' },
-    { displayName: 'Portfolio', navLink: 'portfolio-update' },
-  ];
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private loadingService: LoadingService
+  ) {}
 
   ngOnInit(): void {
     this.router.events
@@ -61,7 +61,20 @@ export class NavigationComponent implements OnInit {
     this.initializeTheme();
   }
 
+  //#region Loading
+
+  get loading$(): Observable<boolean> {
+    return this.loadingService.loading$;
+  }
+
+  //#endregion
+
   //#region Nav
+
+  navItems: Array<NavItem> = [
+    { displayName: 'Profile', navLink: 'profile' },
+    { displayName: 'Portfolio', navLink: 'portfolio-update' },
+  ];
 
   isSelectedNavItem(navLink: string) {
     return navLink === this.selectedNavItem?.navLink;
@@ -80,12 +93,7 @@ export class NavigationComponent implements OnInit {
   }
 
   onLogout() {
-    const opts: LogoutOptions = {};
-    this.authService.logout({
-      logoutParams: {
-        returnTo: environment.auth.logoutRedirectUrl,
-      },
-    });
+    this.authService.logout();
   }
 
   get isAuthenticated$(): Observable<boolean> {
@@ -97,7 +105,7 @@ export class NavigationComponent implements OnInit {
   //#region Theme
 
   initializeTheme() {
-    const usingDarkTheme = localStorage.getItem(this.isDarkThemeStorageKey)
+    const usingDarkTheme = localStorage.getItem(this.isDarkThemeStorageKey);
 
     if (!usingDarkTheme) {
       localStorage.setItem(
@@ -107,7 +115,7 @@ export class NavigationComponent implements OnInit {
       return;
     }
 
-    if (JSON.parse(usingDarkTheme) as boolean && !this.isDarkTheme) {
+    if ((JSON.parse(usingDarkTheme) as boolean) && !this.isDarkTheme) {
       this.toggleTheme();
     }
   }

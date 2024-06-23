@@ -15,13 +15,15 @@
           >
           }
         </mat-button-toggle-group>
-        
       </div>
       <div>
         <div class="flex flex-col">
-
           <div class="mb-5 flex justify-center">
-            <mat-slide-toggle [checked]="isDarkTheme" (toggleChange)="toggleTheme()">Dark Theme</mat-slide-toggle>
+            <mat-slide-toggle
+              [checked]="isDarkTheme"
+              (toggleChange)="toggleTheme()"
+              >Dark Theme</mat-slide-toggle
+            >
           </div>
           @if(isAuthenticated$ | async; as isAuthenticated){
           <button mat-button class="w-full" color="warn" (click)="onLogout()">
@@ -46,6 +48,9 @@
         <mat-icon>menu</mat-icon>
       </button>
     </mat-toolbar>
+    @if (loading$ | async) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
     <div class="p-3 h-100">
       <ng-container [ngTemplateOutlet]="appContent"> </ng-container>
     </div>
