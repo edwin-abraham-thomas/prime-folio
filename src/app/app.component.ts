@@ -14,6 +14,4 @@ import { environment } from '../environments/environment';
 export class AppComponent {
   
   title = 'prime-folio';
-
-  env = environment
 }

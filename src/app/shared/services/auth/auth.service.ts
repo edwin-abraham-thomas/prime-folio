@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AuthService as Auth0, User } from '@auth0/auth0-angular';
 import { environment } from '../../../../environments/environment';
-import { Observable, firstValueFrom, mergeMap, of, switchMap } from 'rxjs';
+import { Observable, firstValueFrom, map, mergeMap, of, switchMap } from 'rxjs';
 import { UserService } from '../../../api/services';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: User | null | undefined;
   isPrimeFolioApiVerified = false;
 
   constructor(private authService: Auth0, private userService: UserService) {}
 
   get isAuthenticated$(): Observable<boolean> {
     return this.authService.isAuthenticated$;
+  }
+
+  get userId(): Promise<string | null | undefined> {
+    return (async () => await firstValueFrom(this.authService.user$.pipe(
+      map(r => r?.sub)
+    )))()
   }
 
   loginWithRedirect(): void {

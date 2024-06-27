@@ -1,0 +1,8 @@
+div:has(> mat-form-field) {
+    width: fit-content;
+    margin-right: 5rem;
+}
+
+mat-form-field {
+    width: 20rem;
+}
