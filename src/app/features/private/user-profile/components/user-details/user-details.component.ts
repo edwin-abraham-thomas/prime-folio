@@ -48,6 +48,9 @@ export class UserDetailsComponent implements OnInit {
   }
 
   Update() {
+    if(!this.userDetailsForm.dirty){
+      return
+    }
     this.userUpdate.emit(this.userDetailsForm.value as User);
   }
 }

@@ -10,7 +10,9 @@ export class LoadingService {
   loading$ = this.loadingSubject.asObservable();
 
   loadingStart() {
-    this.loadingSubject.next(true);
+    setTimeout(() => {
+      this.loadingSubject.next(true);
+    })
   }
 
   loadingStop() {
