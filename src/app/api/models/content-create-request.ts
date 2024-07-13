@@ -2,8 +2,7 @@
 /* eslint-disable */
 import { Dimension } from '../models/dimension';
 import { Tile } from '../models/tile';
-export interface ContentUpdateRequest {
-  '_id': string;
+export interface ContentCreateRequest {
   dimension?: Dimension;
   tiles?: Array<Tile> | null;
   userId: string;

@@ -3,7 +3,7 @@
 export interface UserUpdateRequest {
   email: string;
   firstName: string;
-  lastName: string;
-  phone: string;
+  lastName?: string | null;
+  phone?: string | null;
   userId: string;
 }

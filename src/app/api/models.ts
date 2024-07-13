@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export { Content } from './models/content';
+export { ContentCreateRequest } from './models/content-create-request';
 export { ContentType } from './models/content-type';
 export { ContentUpdateRequest } from './models/content-update-request';
 export { Dimension } from './models/dimension';
