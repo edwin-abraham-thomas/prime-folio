@@ -1,10 +1,10 @@
 import { local } from '../../auth_config.json';
 
 export const environment = {
-    name: "default",
+    name: "local",
     auth: {
         ...local
     },
-    // apiBaseURL: 'https://localhost:7247'
-    apiBaseURL: 'https://pfz3a4ncgb.execute-api.ap-south-1.amazonaws.com'
+    apiBaseURL: 'https://localhost:7247'
+    // apiBaseURL: 'https://pfz3a4ncgb.execute-api.ap-south-1.amazonaws.com'
 };

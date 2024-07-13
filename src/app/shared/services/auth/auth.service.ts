@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthService as Auth0, User } from '@auth0/auth0-angular';
+import { AuthService as Auth0 } from '@auth0/auth0-angular';
 import { environment } from '../../../../environments/environment';
-import { Observable, firstValueFrom, map, mergeMap, of, switchMap } from 'rxjs';
+import { Observable, firstValueFrom, map, mergeMap, of } from 'rxjs';
 import { UserService } from '../../../api/services';
 
 @Injectable({
