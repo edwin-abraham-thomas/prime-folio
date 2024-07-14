@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { ContentType, Tile } from '../../../features/private/portfolio-update/models/layout';
 import { MatIconModule } from '@angular/material/icon';
+import { ContentType, Tile } from '../../../api/models';
 
 @Component({
   selector: 'app-tile',
@@ -20,10 +20,10 @@ export class TileComponent {
 
   //#region ContentType Getters
   get ContentType_Header(): ContentType {
-    return ContentType.header;
+    return ContentType.$0;
   }
   get ContentType_Section(): ContentType {
-    return ContentType.section;
+    return ContentType.$1;
   }
   //#endregion
 }
