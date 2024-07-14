@@ -20,10 +20,10 @@ export class TileComponent {
 
   //#region ContentType Getters
   get ContentType_Header(): ContentType {
-    return ContentType.$0;
+    return ContentType.HEADER;
   }
   get ContentType_Section(): ContentType {
-    return ContentType.$1;
+    return ContentType.SECTION;
   }
   //#endregion
 }
